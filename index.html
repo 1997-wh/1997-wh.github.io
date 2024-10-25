@@ -10,13 +10,13 @@
             text-align: center;
             margin: 0;
             padding: 20px;
-            background-image: url('BackgroundImage.jpg'); /* Replace with your background image filename */
+            background-image: url('BackgroundImage.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
         }
         .container {
-            background-color: rgba(255, 255, 255, 0.8); /* Transparent white */
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -40,6 +40,33 @@
         .resume-link:hover {
             background-color: #0056b3;
         }
+        /* Styling for the side panel */
+        .side-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+            z-index: 1;
+        }
+        .side-panel h2 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        .project-link {
+            color: #00d4ff;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .project-link:hover {
+            color: #fff;
+        }
         /* Styling for the banner */
         .banner {
             position: fixed;
@@ -53,6 +80,15 @@
     </style>
 </head>
 <body>
+    <!-- Side panel for projects -->
+    <div class="side-panel">
+        <h2>My Projects</h2>
+        <a class="project-link" href="https://github.com/1997-wh/Unemployment_Rates_R" target="_blank">Unemployment Rates</a>
+        <a class="project-link" href="https://github.com/1997-wh/Case_Study" target="_blank">BellaBeat Case Study</a>
+        <a class="project-link" href="https://github.com/1997-wh/Bike_Study" target="_blank">BikeStudy Cast Study</a>
+        <!-- Add more project links as needed -->
+    </div>
+
     <div class="container">
         <h1>Welcome</h1>
         <img src="profilepicture.jfif" alt="William Higginbotham">
@@ -60,7 +96,6 @@
         <a class="resume-link" href="William Higginbotham Resume (1).pdf" target="_blank">View My Resume</a>
     </div>
 
-    
     <div class="banner">
         Current time: <span id="currentTime"></span>
     </div>
@@ -74,18 +109,14 @@
             var seconds = now.getSeconds().toString().padStart(2, '0');
             var amPm = hours >= 12 ? 'PM' : 'AM';
 
-            // Convert 24-hour time to 12-hour format
             hours = hours % 12;
-            hours = hours ? hours : 12; // Display '12' instead of '0'
+            hours = hours ? hours : 12;
 
             var currentTime = hours + ':' + minutes + ':' + seconds + ' ' + amPm;
             document.getElementById('currentTime').textContent = currentTime;
         }
 
-        // Update time every second
         setInterval(updateTime, 1000);
-
-        // Initialize time on page load
         updateTime();
     </script>
 </body>
