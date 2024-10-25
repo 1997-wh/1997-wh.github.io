@@ -135,6 +135,7 @@
             text-align: center;
             padding: 10px 0;
             z-index: 2; /* Ensure this is above other content */
+            clip-path: inset(0 100px 0 100px); /* Cuts 200px from the banner's width */
         }
         /* Styling for the banner */
         .banner {
@@ -173,7 +174,7 @@
     <div class="container">
         <h1>Welcome</h1>
         <img src="profilepicture.jfif" alt="William Higginbotham">
-        <p>Hi, I'm William Higginbotham! I am a Junior Data Analyst.</p>
+        <p>Hi, I'm William Higginbotham! I am a Data Analyst.</p>
         <a class="resume-link" href="William Higginbotham Resume (1).pdf" target="_blank">View My Resume</a>
         <br> <!-- Added line break for spacing -->
         <a class="resume-link" href="https://www.linkedin.com/in/william-higginbotham-851556130/" target="_blank">View My LinkedIn</a> <!-- New LinkedIn link -->
@@ -230,40 +231,9 @@
                     } else if (weatherCondition === 'rain') {
                         startRainfall();
                     }
-                } else {
-                    document.getElementById('weather').innerHTML = '<p>Error retrieving weather data.</p>';
                 }
             } catch (error) {
                 console.error('Error fetching weather data:', error);
-                document.getElementById('weather').innerHTML = '<p>Error retrieving weather data.</p>';
-            }
-        }
-
-        // Start snowfall animation
-        function startSnowfall() {
-            const snowContainer = document.querySelector('.snow-container');
-            for (let i = 0; i < 100; i++) { // Create 100 snowflakes
-                const snowflake = document.createElement('div');
-                snowflake.className = 'snowflake';
-                snowflake.innerHTML = '❄'; // Snowflake character
-                snowflake.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
-                snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's'; // Random duration
-                snowflake.style.fontSize = (Math.random() * 1 + 0.5) + 'em'; // Random size
-                snowContainer.appendChild(snowflake);
-            }
-        }
-
-        // Start rainfall animation
-        function startRainfall() {
-            const rainContainer = document.querySelector('.rain-container');
-            for (let i = 0; i < 100; i++) { // Create 100 raindrops
-                const raindrop = document.createElement('div');
-                raindrop.className = 'raindrop';
-                raindrop.innerHTML = '🌧️'; // Raindrop character
-                raindrop.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
-                raindrop.style.animationDuration = (Math.random() * 1 + 0.5) + 's'; // Random duration
-                raindrop.style.fontSize = (Math.random() * 0.5 + 0.5) + 'em'; // Random size
-                rainContainer.appendChild(raindrop);
             }
         }
 
@@ -274,15 +244,50 @@
                     const latitude = position.coords.latitude;
                     const longitude = position.coords.longitude;
                     fetchWeather(latitude, longitude);
-                }, () => {
-                    document.getElementById('weather').innerHTML = '<p>Unable to retrieve your location.</p>';
+                }, (error) => {
+                    console.error('Error getting location:', error);
                 });
             } else {
-                document.getElementById('weather').innerHTML = '<p>Geolocation is not supported by this browser.</p>';
+                console.log("Geolocation is not supported by this browser.");
             }
         }
 
-        getLocation(); // Call the function to get the user's location
+        getLocation();
+
+        // Functions to create snowflakes and raindrops
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.textContent = '❄'; // Snowflake emoji
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            snowflake.style.fontSize = (Math.random() * 1 + 0.5) + 'em';
+            document.querySelector('.snow-container').appendChild(snowflake);
+            snowflake.addEventListener('animationend', () => {
+                snowflake.remove();
+            });
+        }
+
+        function startSnowfall() {
+            setInterval(createSnowflake, 100); // Adjust for more or less snowfall
+        }
+
+        function createRaindrop() {
+            const raindrop = document.createElement('div');
+            raindrop.className = 'raindrop';
+            raindrop.textContent = '⛈'; // Rain emoji
+            raindrop.style.left = Math.random() * 100 + 'vw';
+            raindrop.style.animationDuration = (Math.random() * 2 + 1) + 's';
+            raindrop.style.fontSize = (Math.random() * 1 + 0.5) + 'em';
+            document.querySelector('.rain-container').appendChild(raindrop);
+            raindrop.addEventListener('animationend', () => {
+                raindrop.remove();
+            });
+        }
+
+        function startRainfall() {
+            setInterval(createRaindrop, 100); // Adjust for more or less rain
+        }
     </script>
 </body>
 </html>
