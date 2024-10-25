@@ -18,6 +18,7 @@
             background-position: center;
             background-repeat: no-repeat;
             min-height: 100vh;
+            overflow: hidden; /* Prevents scrollbars from appearing */
         }
         .container {
             background-color: rgba(255, 255, 255, 0.8);
@@ -43,6 +44,43 @@
         }
         .resume-link:hover {
             background-color: #0056b3;
+        }
+        .snow-container, .rain-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Prevents interaction with the animation */
+            overflow: hidden;
+        }
+        /* Snowfall animation */
+        @keyframes snowfall {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+        .snowflake {
+            position: absolute;
+            top: -10%;
+            color: white;
+            font-size: 1em;
+            opacity: 0.7;
+            pointer-events: none;
+            animation: snowfall linear infinite;
+        }
+        /* Rainfall animation */
+        @keyframes rain {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+        .raindrop {
+            position: absolute;
+            top: -10%;
+            color: blue; /* Or whatever color you prefer */
+            font-size: 1em;
+            opacity: 0.5;
+            pointer-events: none;
+            animation: rain linear infinite;
         }
         /* Styling for the left side panel */
         .side-panel-left {
@@ -97,7 +135,11 @@
     </style>
 </head>
 <body>
-    <!-- Left side panel -->
+    <!-- Snow and rain containers -->
+    <div class="snow-container"></div>
+    <div class="rain-container"></div>
+
+    <!-- Left side panel for projects -->
     <div class="side-panel-left">
         <h2>My Projects</h2>
         <a class="project-link" href="https://github.com/1997-wh/Unemployment_Rates_R" target="_blank">Unemployment Rates</a>
@@ -107,7 +149,7 @@
         <!-- Add more project links as needed -->
     </div>
 
-    <!-- Right side panel -->
+    <!-- Right side panel for weather -->
     <div class="side-panel-right">
         <h2>Current Weather</h2>
         <div id="weather"></div>
@@ -117,7 +159,7 @@
     <div class="container">
         <h1>Welcome</h1>
         <img src="profilepicture.jfif" alt="William Higginbotham">
-        <p>Hi, I'm William Higginbotham! I am a Data Analyst.</p>
+        <p>Hi, I'm William Higginbotham! I am a Junior Data Analyst.</p>
         <a class="resume-link" href="William Higginbotham Resume (1).pdf" target="_blank">View My Resume</a>
         <br> <!-- Added line break for spacing -->
         <a class="resume-link" href="https://www.linkedin.com/in/william-higginbotham-851556130/" target="_blank">View My LinkedIn</a> <!-- New LinkedIn link -->
@@ -149,24 +191,60 @@
         // Fetch current weather data based on user's location
         async function fetchWeather(latitude, longitude) {
             const apiKey = '37104ead748f70ca9eb013e3d2199195'; // Your OpenWeatherMap API key
-            const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
 
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                if (data.current) {
+                if (data.weather) {
+                    const weatherCondition = data.weather[0].main.toLowerCase();
                     const weatherInfo = `
-                        <p>Temperature: ${data.current.temp} °F</p>
-                        <p>Condition: ${data.current.weather[0].description}</p>
+                        <p>Temperature: ${data.main.temp} °F</p>
+                        <p>Condition: ${data.weather[0].description}</p>
                     `;
                     document.getElementById('weather').innerHTML = weatherInfo;
-                    document.getElementById('location').innerHTML = `Location: ${data.timezone}`;
+                    document.getElementById('location').innerHTML = `Location: ${data.name}`;
+
+                    // Add effects based on weather conditions
+                    if (weatherCondition === 'snow') {
+                        startSnowfall();
+                    } else if (weatherCondition === 'rain') {
+                        startRainfall();
+                    }
                 } else {
                     document.getElementById('weather').innerHTML = '<p>Weather data not available.</p>';
                 }
             } catch (error) {
                 console.error('Error fetching weather data:', error);
                 document.getElementById('weather').innerHTML = '<p>Error retrieving weather data.</p>';
+            }
+        }
+
+        // Start snowfall animation
+        function startSnowfall() {
+            const snowContainer = document.querySelector('.snow-container');
+            for (let i = 0; i < 100; i++) { // Create 100 snowflakes
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.innerHTML = '❄'; // Snowflake character
+                snowflake.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+                snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's'; // Random duration
+                snowflake.style.fontSize = (Math.random() * 1 + 0.5) + 'em'; // Random size
+                snowContainer.appendChild(snowflake);
+            }
+        }
+
+        // Start rainfall animation
+        function startRainfall() {
+            const rainContainer = document.querySelector('.rain-container');
+            for (let i = 0; i < 100; i++) { // Create 100 raindrops
+                const raindrop = document.createElement('div');
+                raindrop.className = 'raindrop';
+                raindrop.innerHTML = '🌧️'; // Raindrop character
+                raindrop.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+                raindrop.style.animationDuration = (Math.random() * 1 + 0.5) + 's'; // Random duration
+                raindrop.style.fontSize = (Math.random() * 0.5 + 0.5) + 'em'; // Random size
+                rainContainer.appendChild(raindrop);
             }
         }
 
