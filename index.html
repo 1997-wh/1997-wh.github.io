@@ -144,6 +144,20 @@
             text-align: center;
             padding: 10px 0;
         }
+        /* Styling for the location access banner */
+        .location-banner {
+            position: fixed;
+            bottom: 60px; /* Adjusted to sit above the time banner */
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 20px); /* Reducing width to avoid overlap */
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 2; /* Ensure this is above other content */
+            clip-path: inset(0 50px); /* Cuts off the edges for side panels */
+        }
     </style>
 </head>
 <body>
@@ -178,7 +192,7 @@
     </div>
 
     <!-- New top banner for location access -->
-    <div class="top-banner">
+    <div class="location-banner">
         Please allow access to your location to test my OpenWeather API code.
     </div>
 
@@ -222,10 +236,9 @@
                     document.getElementById('weather').innerHTML = weatherInfo;
                     document.getElementById('location').innerHTML = `Location: ${data.name}`;
 
-                    // Add effects based on weather conditions
-                    if (weatherCondition === 'snow') {
+                    if (weatherCondition.includes('snow')) {
                         startSnowfall();
-                    } else if (weatherCondition === 'rain') {
+                    } else if (weatherCondition.includes('rain')) {
                         startRainfall();
                     }
                 } else {
