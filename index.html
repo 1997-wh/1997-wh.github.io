@@ -124,7 +124,7 @@
             z-index: 1;
             margin-bottom: 40px; /* Space for the bottom banner */
         }
-        /* Styling for the top banner */
+        /* Styling for the top banner (black) */
         .top-banner {
             position: fixed;
             bottom: 40px; /* Adjust this based on the height of the current time banner */
@@ -135,9 +135,8 @@
             text-align: center;
             padding: 10px 0;
             z-index: 2; /* Ensure this is above other content */
-            clip-path: inset(0 100px 0 100px); /* Cuts 200px from the banner's width */
         }
-        /* Styling for the banner */
+        /* Styling for the current time banner */
         .banner {
             position: fixed;
             bottom: 0;
@@ -174,19 +173,19 @@
     <div class="container">
         <h1>Welcome</h1>
         <img src="profilepicture.jfif" alt="William Higginbotham">
-        <p>Hi, I'm William Higginbotham! I am a Data Analyst.</p>
+        <p>Hi, I'm William Higginbotham! I am a Junior Data Analyst.</p>
         <a class="resume-link" href="William Higginbotham Resume (1).pdf" target="_blank">View My Resume</a>
         <br> <!-- Added line break for spacing -->
         <a class="resume-link" href="https://www.linkedin.com/in/william-higginbotham-851556130/" target="_blank">View My LinkedIn</a> <!-- New LinkedIn link -->
     </div>
 
     <!-- New top banner for location access -->
-    <div class="top-banner">
-        Please allow access to your location to test my OpenWeather API code.
-    </div>
-
     <div class="banner">
         Current time: <span id="currentTime"></span>
+    </div>
+    
+    <div class="top-banner">
+        Please allow access to your location to test my OpenWeather API code.
     </div>
 
     <script>
