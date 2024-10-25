@@ -154,11 +154,10 @@
         setInterval(updateTime, 1000);
         updateTime();
 
-        // Fetch current weather data
-        async function fetchWeather() {
-            const apiKey = 'YOUR_API_KEY'; // Replace with your actual OpenWeatherMap API key
-            const city = 'YOUR_CITY'; // Replace with your desired city
-            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+        // Fetch current weather data based on user's location
+        async function fetchWeather(latitude, longitude) {
+            const apiKey = 'f96264df84a6f0542fe1f3c47eef2872'; 
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
 
             try {
                 const response = await fetch(url);
@@ -178,7 +177,22 @@
             }
         }
 
-        fetchWeather(); // Call the function to fetch weather data
+        // Get user's location and fetch weather data
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    fetchWeather(latitude, longitude);
+                }, () => {
+                    document.getElementById('weather').innerHTML = '<p>Unable to retrieve your location.</p>';
+                });
+            } else {
+                document.getElementById('weather').innerHTML = '<p>Geolocation is not supported by this browser.</p>';
+            }
+        }
+
+        getLocation(); // Call the function to get the user's location
     </script>
 
     <!-- Google Translate -->
