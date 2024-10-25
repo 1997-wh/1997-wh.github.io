@@ -60,19 +60,25 @@
         <a class="resume-link" href="William Higginbotham Resume (1).pdf" target="_blank">View My Resume</a>
     </div>
 
-    <!-- Banner to show current time -->
+    
     <div class="banner">
         Current time: <span id="currentTime"></span>
     </div>
 
     <script>
-        // JavaScript to display the current time
+        // JavaScript to display the current time in 12-hour format with AM/PM
         function updateTime() {
             var now = new Date();
-            var hours = now.getHours().toString().padStart(2, '0');
+            var hours = now.getHours();
             var minutes = now.getMinutes().toString().padStart(2, '0');
             var seconds = now.getSeconds().toString().padStart(2, '0');
-            var currentTime = hours + ':' + minutes + ':' + seconds;
+            var amPm = hours >= 12 ? 'PM' : 'AM';
+
+            // Convert 24-hour time to 12-hour format
+            hours = hours % 12;
+            hours = hours ? hours : 12; // Display '12' instead of '0'
+
+            var currentTime = hours + ':' + minutes + ':' + seconds + ' ' + amPm;
             document.getElementById('currentTime').textContent = currentTime;
         }
 
