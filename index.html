@@ -121,14 +121,9 @@
     <!-- Right side panel for weather -->
     <div class="side-panel-right">
         <h2>Current Weather</h2>
-        <select id="citySelect" onchange="fetchWeather()">
-            <option value="Los Angeles">Los Angeles</option>
-            <option value="New York">New York</option>
-            <option value="Paris">Paris</option>
-            <option value="Moscow">Moscow</option>
-            <option value="Beijing">Beijing</option>
-        </select>
         <div id="weather"></div>
+        <h2>Local Time</h2>
+        <div id="localTime"></div>
     </div>
 
     <div class="container">
@@ -161,58 +156,27 @@
         setInterval(updateTime, 1000);
         updateTime();
 
-        // Fetch weather data based on selected city
-        async function fetchWeather() {
-            const city = document.getElementById('citySelect').value;
-            let lat, lon;
-
-            // Define coordinates for each city
-            switch(city) {
-                case 'Los Angeles':
-                    lat = 34.0522;
-                    lon = -118.2437;
-                    break;
-                case 'New York':
-                    lat = 40.7128;
-                    lon = -74.0060;
-                    break;
-                case 'Paris':
-                    lat = 48.8566;
-                    lon = 2.3522;
-                    break;
-                case 'Moscow':
-                    lat = 55.7558;
-                    lon = 37.6173;
-                    break;
-                case 'Beijing':
-                    lat = 39.9042;
-                    lon = 116.4074;
-                    break;
-                default:
-                    lat = 34.0522; // Default to Los Angeles
-                    lon = -118.2437;
-            }
-
-            // Define the protocol and base URL for the OpenWeatherMap API
-            let baseUrl;
-            if (location.protocol === 'http:') {
-                baseUrl = 'http://api.openweathermap.org/data/3.0/onecall';
-            } else {
-                baseUrl = 'https://api.openweathermap.org/data/3.0/onecall';
-            }
-            
+        // Fetch current weather data based on user's location
+        async function fetchWeather(latitude, longitude) {
             const apiKey = '37104ead748f70ca9eb013e3d2199195'; // Your OpenWeatherMap API key
-            const url = `${baseUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
+            const url = (location.protocol === 'http:' ?
+                `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial` :
+                `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`
+            );
 
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                if (data.current) {
+                if (data.main) {
                     const weatherInfo = `
-                        <p>Temperature: ${data.current.temp} °F</p>
-                        <p>Condition: ${data.current.weather[0].description}</p>
+                        <p>Temperature: ${data.main.temp} °F</p>
+                        <p>Condition: ${data.weather[0].description}</p>
                     `;
                     document.getElementById('weather').innerHTML = weatherInfo;
+
+                    // Get local time based on the timezone from the API
+                    const localTime = new Date((data.dt + data.timezone) * 1000);
+                    document.getElementById('localTime').textContent = localTime.toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour12: true });
                 } else {
                     document.getElementById('weather').innerHTML = '<p>Weather data not available.</p>';
                 }
@@ -222,7 +186,22 @@
             }
         }
 
-        fetchWeather(); // Call to fetch weather for the default city on load
+        // Get user's location and fetch weather data
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    fetchWeather(latitude, longitude);
+                }, () => {
+                    document.getElementById('weather').innerHTML = '<p>Unable to retrieve your location.</p>';
+                });
+            } else {
+                document.getElementById('weather').innerHTML = '<p>Geolocation is not supported by this browser.</p>';
+            }
+        }
+
+        getLocation(); // Call the function to get the user's location
     </script>
 
     <!-- Google Translate -->
