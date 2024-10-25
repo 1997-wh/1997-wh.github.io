@@ -122,6 +122,18 @@
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
             z-index: 1;
         }
+        /* Styling for the top banner */
+        .top-banner {
+            position: fixed;
+            bottom: 40px; /* Adjust this based on the height of the current time banner */
+            left: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 2; /* Ensure this is above other content */
+        }
         /* Styling for the banner */
         .banner {
             position: fixed;
@@ -163,6 +175,11 @@
         <a class="resume-link" href="William Higginbotham Resume (1).pdf" target="_blank">View My Resume</a>
         <br> <!-- Added line break for spacing -->
         <a class="resume-link" href="https://www.linkedin.com/in/william-higginbotham-851556130/" target="_blank">View My LinkedIn</a> <!-- New LinkedIn link -->
+    </div>
+
+    <!-- New top banner for location access -->
+    <div class="top-banner">
+        Please allow access to your location to test my OpenWeather API code.
     </div>
 
     <div class="banner">
