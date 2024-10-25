@@ -110,20 +110,6 @@
         .project-link:hover {
             color: #fff;
         }
-        /* Styling for the right side panel for weather */
-        .side-panel-right {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 250px;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.8);
-            color: #333;
-            padding: 20px;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
-            z-index: 1;
-            margin-bottom: 40px; /* Space for the bottom banner */
-        }
         /* Styling for the top banner (black) */
         .top-banner {
             position: fixed;
@@ -139,7 +125,7 @@
         /* Styling for the current time banner */
         .banner {
             position: fixed;
-            top: 40px; /* Adjust this based on the height of the top banner */
+            bottom: 0; /* Positioned at the very bottom */
             width: 100%;
             background-color: #007bff;
             color: white;
