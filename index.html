@@ -156,16 +156,16 @@
 
         // Fetch current weather data based on user's location
         async function fetchWeather(latitude, longitude) {
-            const apiKey = '37104ead748f70ca9eb013e3d2199195'; 
-            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
+            const apiKey = '37104ead748f70ca9eb013e3d2199195'; // Your OpenWeatherMap API key
+            const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
 
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                if (data.main) {
+                if (data.current) {
                     const weatherInfo = `
-                        <p>Temperature: ${data.main.temp} °F</p>
-                        <p>Condition: ${data.weather[0].description}</p>
+                        <p>Temperature: ${data.current.temp} °F</p>
+                        <p>Condition: ${data.current.weather[0].description}</p>
                     `;
                     document.getElementById('weather').innerHTML = weatherInfo;
                 } else {
