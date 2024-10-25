@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>William Higginbotham's Website</title>
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin: 0;
-            padding: 20px;
             background-image: url('BackgroundImage.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            min-height: 100vh;
         }
         .container {
             background-color: rgba(255, 255, 255, 0.8);
@@ -77,17 +81,38 @@
             text-align: center;
             padding: 10px 0;
         }
+        /* Google Translate Widget */
+        #google_translate_element {
+            position: absolute;
+            top: 20px; /* Distance from the top */
+            right: 20px; /* Distance from the right */
+            z-index: 10; /* Ensure it stays above other elements */
+            background-color: rgba(255, 255, 255, 0.8); /* Optional: add a slight background for better visibility */
+            border-radius: 5px; /* Optional: round the corners */
+            padding: 5px; /* Optional: add some padding */
+        }
     </style>
 </head>
 <body>
+    <!-- Google Translate Widget -->
+    <div id="google_translate_element"></div>
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'en',
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+      }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <!-- Side panel for projects -->
     <div class="side-panel">
         <h2>My Projects</h2>
         <a class="project-link" href="https://github.com/1997-wh/Unemployment_Rates_R" target="_blank">Unemployment Rates</a>
         <a class="project-link" href="https://github.com/1997-wh/Case_Study" target="_blank">BellaBeat Case Study</a>
-        <a class="project-link" href="https://github.com/1997-wh/Bike_Study" target="_blank">BikeStudy Cast Study</a>
-        <a class="project-link" href="https://github.com/1997-wh/Tableau-Proje" target="_blank">BTC Price Analysis</a>
-        <!-- Add more project links as needed -->
+        <a class="project-link" href="https://github.com/1997-wh/Bike_Study" target="_blank">BikeStudy Case Study</a>
+        <a class="project-link" href="https://github.com/1997-wh/Tableau-Project" target="_blank">BTC Price Analysis</a>
     </div>
 
     <div class="container">
@@ -111,7 +136,7 @@
             var amPm = hours >= 12 ? 'PM' : 'AM';
 
             hours = hours % 12;
-            hours = hours ? hours : 12;
+            hours = hours ? hours : 12; // Display '12' instead of '0'
 
             var currentTime = hours + ':' + minutes + ':' + seconds + ' ' + amPm;
             document.getElementById('currentTime').textContent = currentTime;
@@ -120,17 +145,5 @@
         setInterval(updateTime, 1000);
         updateTime();
     </script>
-    <!-- Google Translate -->
-<div id="google_translate_element"></div>
-<script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'en',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-  }
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 </body>
 </html>
