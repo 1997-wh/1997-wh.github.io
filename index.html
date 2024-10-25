@@ -132,6 +132,25 @@
             text-align: center;
             padding: 10px 0;
         }
+        /* Styling for the right side panel */
+        .side-panel-right {
+            position: fixed;
+            top: 0;
+            right: 0; /* Positioned on the right side */
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+            z-index: 1;
+            margin-bottom: 40px; /* Space for the bottom banner */
+        }
+        .side-panel-right h2 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
@@ -222,24 +241,26 @@
             }
         }
 
-        // Get user's location and fetch weather data
+        // Get user's location
         function getLocation() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
-                    fetchWeather(latitude, longitude);
-                }, (error) => {
-                    console.error('Error getting location:', error);
-                });
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        fetchWeather(latitude, longitude);
+                    },
+                    (error) => {
+                        console.error('Error getting location:', error);
+                    }
+                );
             } else {
-                console.log("Geolocation is not supported by this browser.");
+                console.error('Geolocation is not supported by this browser.');
             }
         }
 
-        getLocation();
+        // Call getLocation to fetch weather data on page load
+        window.onload = getLocation;
 
-        // Functions to create snowflakes and raindrops
         function createSnowflake() {
             const snowflake = document.createElement('div');
             snowflake.className = 'snowflake';
