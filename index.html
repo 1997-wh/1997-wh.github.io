@@ -127,7 +127,7 @@
         /* Styling for the top banner (black) */
         .top-banner {
             position: fixed;
-            bottom: 40px; /* Adjust this based on the height of the current time banner */
+            top: 0; /* Positioned at the very top */
             left: 0;
             width: 100%;
             background-color: black;
@@ -139,7 +139,7 @@
         /* Styling for the current time banner */
         .banner {
             position: fixed;
-            bottom: 0;
+            top: 40px; /* Adjust this based on the height of the top banner */
             width: 100%;
             background-color: #007bff;
             color: white;
@@ -180,12 +180,12 @@
     </div>
 
     <!-- New top banner for location access -->
-    <div class="banner">
-        Current time: <span id="currentTime"></span>
-    </div>
-    
     <div class="top-banner">
         Please allow access to your location to test my OpenWeather API code.
+    </div>
+
+    <div class="banner">
+        Current time: <span id="currentTime"></span>
     </div>
 
     <script>
