@@ -94,18 +94,6 @@
             text-align: center;
             padding: 10px 0;
         }
-        /* Google Translate Widget */
-        #google_translate_element {
-            position: absolute;
-            bottom: 20px; /* Distance from the bottom */
-            left: 20px; /* Distance from the left */
-            z-index: 10; /* Ensure it stays above other elements */
-            background-color: rgba(255, 255, 255, 0.8); /* Optional: add a slight background for better visibility */
-            border-radius: 5px; /* Optional: round the corners */
-            padding: 2px; /* Reduced padding */
-            font-size: 0.6em; /* Resize to 40% smaller */
-            width: 100px; /* Set a fixed width */
-        }
     </style>
 </head>
 <body>
@@ -123,8 +111,7 @@
     <div class="side-panel-right">
         <h2>Current Weather</h2>
         <div id="weather"></div>
-        <h2>Local Time</h2>
-        <div id="localTime"></div>
+        <div id="location"></div>
     </div>
 
     <div class="container">
@@ -158,42 +145,39 @@
         updateTime();
 
         // Fetch current weather data based on user's location
-        async function fetchWeather(latitude, longitude) {
-            const apiKey = '37104ead748f70ca9eb013e3d2199195'; // Your OpenWeatherMap API key
-            const url = (location.protocol === 'http:' ?
-                `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial` :
-                `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`
-            );
-
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-                if (data.main) {
-                    const weatherInfo = `
-                        <p>Temperature: ${data.main.temp} °F</p>
-                        <p>Condition: ${data.weather[0].description}</p>
-                    `;
-                    document.getElementById('weather').innerHTML = weatherInfo;
-
-                    // Get local time based on the timezone from the API
-                    const localTime = new Date((data.dt + data.timezone) * 1000);
-                    document.getElementById('localTime').textContent = localTime.toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour12: true });
-                } else {
-                    document.getElementById('weather').innerHTML = '<p>Weather data not available.</p>';
-                }
-            } catch (error) {
-                console.error('Error fetching weather data:', error);
-                document.getElementById('weather').innerHTML = '<p>Error retrieving weather data.</p>';
-            }
-        }
-
-        // Get user's location and fetch weather data
-        function getLocation() {
+        async function fetchWeather() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
+                navigator.geolocation.getCurrentPosition(async (position) => {
                     const latitude = position.coords.latitude;
                     const longitude = position.coords.longitude;
-                    fetchWeather(latitude, longitude);
+
+                    const apiKey = '37104ead748f70ca9eb013e3d2199195'; // Your OpenWeatherMap API key
+                    const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
+
+                    try {
+                        const response = await fetch(url);
+                        const data = await response.json();
+                        if (data.current) {
+                            const weatherInfo = `
+                                <p>Temperature: ${data.current.temp} °F</p>
+                                <p>Condition: ${data.current.weather[0].description}</p>
+                            `;
+                            document.getElementById('weather').innerHTML = weatherInfo;
+
+                            // Display the current location
+                            const locationInfo = `Location: ${data.timezone}`;
+                            document.getElementById('location').innerHTML = locationInfo;
+
+                            // Get the local time for the user's location
+                            const localTime = new Date((data.current.dt + data.timezone_offset) * 1000);
+                            document.getElementById('currentTime').textContent = localTime.toLocaleTimeString('en-US');
+                        } else {
+                            document.getElementById('weather').innerHTML = '<p>Weather data not available.</p>';
+                        }
+                    } catch (error) {
+                        console.error('Error fetching weather data:', error);
+                        document.getElementById('weather').innerHTML = '<p>Error retrieving weather data.</p>';
+                    }
                 }, () => {
                     document.getElementById('weather').innerHTML = '<p>Unable to retrieve your location.</p>';
                 });
@@ -202,19 +186,7 @@
             }
         }
 
-        getLocation(); // Call the function to get the user's location
+        fetchWeather(); // Call the function to get the user's weather data
     </script>
-
-    <!-- Google Translate -->
-    <div id="google_translate_element"></div>
-    <script type="text/javascript">
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-          pageLanguage: 'en',
-          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-        }, 'google_translate_element');
-      }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
