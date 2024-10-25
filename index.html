@@ -121,6 +121,13 @@
     <!-- Right side panel for weather -->
     <div class="side-panel-right">
         <h2>Current Weather</h2>
+        <select id="citySelect" onchange="fetchWeather()">
+            <option value="Los Angeles">Los Angeles</option>
+            <option value="New York">New York</option>
+            <option value="Paris">Paris</option>
+            <option value="Moscow">Moscow</option>
+            <option value="Beijing">Beijing</option>
+        </select>
         <div id="weather"></div>
     </div>
 
@@ -154,10 +161,40 @@
         setInterval(updateTime, 1000);
         updateTime();
 
-        // Fetch current weather data based on user's location
-        async function fetchWeather(latitude, longitude) {
+        // Fetch weather data based on selected city
+        async function fetchWeather() {
+            const city = document.getElementById('citySelect').value;
+            let lat, lon;
+
+            // Define coordinates for each city
+            switch(city) {
+                case 'Los Angeles':
+                    lat = 34.0522;
+                    lon = -118.2437;
+                    break;
+                case 'New York':
+                    lat = 40.7128;
+                    lon = -74.0060;
+                    break;
+                case 'Paris':
+                    lat = 48.8566;
+                    lon = 2.3522;
+                    break;
+                case 'Moscow':
+                    lat = 55.7558;
+                    lon = 37.6173;
+                    break;
+                case 'Beijing':
+                    lat = 39.9042;
+                    lon = 116.4074;
+                    break;
+                default:
+                    lat = 34.0522; // Default to Los Angeles
+                    lon = -118.2437;
+            }
+
             const apiKey = '37104ead748f70ca9eb013e3d2199195'; // Your OpenWeatherMap API key
-            const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
+            const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
 
             try {
                 const response = await fetch(url);
@@ -177,22 +214,7 @@
             }
         }
 
-        // Get user's location and fetch weather data
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
-                    fetchWeather(latitude, longitude);
-                }, () => {
-                    document.getElementById('weather').innerHTML = '<p>Unable to retrieve your location.</p>';
-                });
-            } else {
-                document.getElementById('weather').innerHTML = '<p>Geolocation is not supported by this browser.</p>';
-            }
-        }
-
-        getLocation(); // Call the function to get the user's location
+        fetchWeather(); // Call to fetch weather for the default city on load
     </script>
 
     <!-- Google Translate -->
@@ -205,6 +227,4 @@
         }, 'google_translate_element');
       }
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-</body>
-</html>
+    <script type="text/javascript" src="//translate.google.com/translate_a/
