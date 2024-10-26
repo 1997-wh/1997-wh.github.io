@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 5000
 
 # Define the command to run your app.
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "chatbot:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "Chatbot:app"]
