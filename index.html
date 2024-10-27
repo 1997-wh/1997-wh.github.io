@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>William Higginbotham's Website</title>
     <style>
-        html, body {
+        html,
+        body {
             height: 100%;
             margin: 0;
             padding: 0;
         }
+
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -18,21 +21,15 @@
             background-position: center;
             background-repeat: no-repeat;
             min-height: 100vh;
-            overflow: hidden; /* Prevents scrollbars from appearing */
+            overflow: hidden;
         }
-        .container {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 0 auto;
-        }
+
         img {
             border-radius: 50%;
             width: 150px;
             height: 150px;
         }
+
         .resume-link {
             display: inline-block;
             margin-top: 20px;
@@ -42,46 +39,11 @@
             text-decoration: none;
             border-radius: 5px;
         }
+
         .resume-link:hover {
             background-color: #0056b3;
         }
-        .snow-container, .rain-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none; /* Prevents interaction with the animation */
-            overflow: hidden;
-        }
-        /* Snowfall animation */
-        @keyframes snowfall {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(100vh); }
-        }
-        .snowflake {
-            position: absolute;
-            top: -10%;
-            color: white;
-            font-size: 1em;
-            opacity: 0.7;
-            pointer-events: none;
-            animation: snowfall linear infinite;
-        }
-        /* Rainfall animation */
-        @keyframes rain {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(100vh); }
-        }
-        .raindrop {
-            position: absolute;
-            top: -10%;
-            color: blue; /* Or whatever color you prefer */
-            font-size: 1em;
-            opacity: 0.5;
-            pointer-events: none;
-            animation: rain linear infinite;
-        }
+
         /* Styling for the left side panel */
         .side-panel-left {
             position: fixed;
@@ -95,48 +57,41 @@
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
             overflow-y: auto;
             z-index: 1;
-            margin-bottom: 40px; /* Space for the bottom banner */
+            margin-bottom: 40px;
         }
+
         .side-panel-left h2 {
             color: #007bff;
             margin-bottom: 15px;
         }
+
         .project-link {
             color: #00d4ff;
             text-decoration: none;
             display: block;
             margin-bottom: 10px;
         }
+
         .project-link:hover {
             color: #fff;
         }
-        /* Styling for the top banner (black) */
-        .top-banner {
-            position: fixed;
-            top: 0; /* Positioned at the very top */
-            left: 0;
-            width: 100%;
-            background-color: black;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            z-index: 2; /* Ensure this is above other content */
-        }
+
         /* Styling for the current time banner */
         .banner {
             position: fixed;
-            bottom: 0; /* Positioned at the very bottom */
+            bottom: 0;
             width: 100%;
             background-color: #007bff;
             color: white;
             text-align: center;
             padding: 10px 0;
         }
+
         /* Styling for the right side panel */
         .side-panel-right {
             position: fixed;
             top: 0;
-            right: 0; /* Positioned on the right side */
+            right: 0;
             width: 250px;
             height: 100%;
             background-color: #333;
@@ -145,14 +100,16 @@
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
             overflow-y: auto;
             z-index: 1;
-            margin-bottom: 40px; /* Space for the bottom banner */
+            margin-bottom: 40px;
         }
+
         .side-panel-right h2 {
             color: #007bff;
             margin-bottom: 15px;
         }
     </style>
 </head>
+
 <body>
     <!-- Snow and rain containers -->
     <div class="snow-container"></div>
@@ -161,11 +118,12 @@
     <!-- Left side panel for projects -->
     <div class="side-panel-left">
         <h2>My Projects</h2>
-        <a class="project-link" href="https://github.com/1997-wh/Unemployment_Rates_R" target="_blank">Unemployment Rates</a>
+        <a class="project-link" href="https://github.com/1997-wh/Unemployment_Rates_R" target="_blank">Unemployment
+            Rates</a>
         <a class="project-link" href="https://github.com/1997-wh/Case_Study" target="_blank">BellaBeat Case Study</a>
         <a class="project-link" href="https://github.com/1997-wh/Bike_Study" target="_blank">BikeStudy Case Study</a>
         <a class="project-link" href="https://github.com/1997-wh/Tableau-Project" target="_blank">BTC Price Analysis</a>
-        <!-- Add more project links as needed -->
+        <a class="project-link" href="https://github.com/1997-wh/Amazon_Sales_SQL" target="_blank">Amazon Sales</a>
     </div>
 
     <!-- Right side panel for weather -->
@@ -180,13 +138,9 @@
         <img src="profilepicture.jfif" alt="William Higginbotham">
         <p>Hi, I'm William Higginbotham, a Data Analyst.</p>
         <a class="resume-link" href="William Higginbotham Resume (1).pdf" target="_blank">View My Resume</a>
-        <br> <!-- Added line break for spacing -->
-        <a class="resume-link" href="https://www.linkedin.com/in/william-higginbotham-851556130/" target="_blank">View My LinkedIn</a> <!-- New LinkedIn link -->
-    </div>
-
-    <!-- New top banner for location access -->
-    <div class="top-banner">
-        Please allow access to your location to test my OpenWeather API code.
+        <br>
+        <a class="resume-link" href="https://www.linkedin.com/in/william-higginbotham-851556130/" target="_blank">View
+            My LinkedIn</a>
     </div>
 
     <div class="banner">
@@ -203,7 +157,7 @@
             var amPm = hours >= 12 ? 'PM' : 'AM';
 
             hours = hours % 12;
-            hours = hours ? hours : 12; // Display '12' instead of '0'
+            hours = hours ? hours : 12;
 
             var currentTime = hours + ':' + minutes + ':' + seconds + ' ' + amPm;
             document.getElementById('currentTime').textContent = currentTime;
@@ -214,34 +168,25 @@
 
         // Fetch current weather data based on user's location
         async function fetchWeather(latitude, longitude) {
-            const apiKey = '37104ead748f70ca9eb013e3d2199195'; // Your OpenWeatherMap API key
+            const apiKey = '37104ead748f70ca9eb013e3d2199195';
             const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
 
             try {
                 const response = await fetch(url);
                 const data = await response.json();
                 if (data.weather) {
-                    const weatherCondition = data.weather[0].main.toLowerCase();
                     const weatherInfo = `
                         <p>Temperature: ${data.main.temp} °F</p>
                         <p>Condition: ${data.weather[0].description}</p>
                     `;
                     document.getElementById('weather').innerHTML = weatherInfo;
                     document.getElementById('location').innerHTML = `Location: ${data.name}`;
-
-                    // Add effects based on weather conditions
-                    if (weatherCondition === 'snow') {
-                        startSnowfall();
-                    } else if (weatherCondition === 'rain') {
-                        startRainfall();
-                    }
                 }
             } catch (error) {
                 console.error('Error fetching weather data:', error);
             }
         }
 
-        // Get user's location
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
@@ -258,42 +203,8 @@
             }
         }
 
-        // Call getLocation to fetch weather data on page load
         window.onload = getLocation;
-
-        function createSnowflake() {
-            const snowflake = document.createElement('div');
-            snowflake.className = 'snowflake';
-            snowflake.textContent = '❄'; // Snowflake emoji
-            snowflake.style.left = Math.random() * 100 + 'vw';
-            snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            snowflake.style.fontSize = (Math.random() * 1 + 0.5) + 'em';
-            document.querySelector('.snow-container').appendChild(snowflake);
-            snowflake.addEventListener('animationend', () => {
-                snowflake.remove();
-            });
-        }
-
-        function startSnowfall() {
-            setInterval(createSnowflake, 100); // Adjust for more or less snowfall
-        }
-
-        function createRaindrop() {
-            const raindrop = document.createElement('div');
-            raindrop.className = 'raindrop';
-            raindrop.textContent = '⛈'; // Rain emoji
-            raindrop.style.left = Math.random() * 100 + 'vw';
-            raindrop.style.animationDuration = (Math.random() * 2 + 1) + 's';
-            raindrop.style.fontSize = (Math.random() * 1 + 0.5) + 'em';
-            document.querySelector('.rain-container').appendChild(raindrop);
-            raindrop.addEventListener('animationend', () => {
-                raindrop.remove();
-            });
-        }
-
-        function startRainfall() {
-            setInterval(createRaindrop, 100); // Adjust for more or less rain
-        }
     </script>
 </body>
+
 </html>
