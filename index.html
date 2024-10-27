@@ -28,6 +28,7 @@
             border-radius: 50%;
             width: 150px;
             height: 150px;
+            margin-top: 30px;
         }
 
         .resume-link {
@@ -43,24 +44,73 @@
         .resume-link:hover {
             background-color: #0056b3;
         }
+<<<<<<< HEAD
 
         /* Styling for the left side panel */
         .side-panel-left {
+=======
+        .snow-container, .rain-container {
             position: fixed;
             top: 0;
             left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        @keyframes snowfall {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+        .snowflake {
+            position: absolute;
+            top: -10%;
+            color: white;
+            font-size: 1em;
+            opacity: 0.7;
+            pointer-events: none;
+            animation: snowfall linear infinite;
+        }
+        @keyframes rain {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+        .raindrop {
+            position: absolute;
+            top: -10%;
+            color: blue;
+            font-size: 1em;
+            opacity: 0.5;
+            pointer-events: none;
+            animation: rain linear infinite;
+        }
+        .side-panel-left, .side-panel-right {
+>>>>>>> 5340a64969fce81463909ae6f5a7797de151acc2
+            position: fixed;
+            top: 0;
             width: 250px;
             height: 100%;
             background-color: #333;
             color: white;
             padding: 20px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
             overflow-y: auto;
             z-index: 1;
             margin-bottom: 40px;
         }
+<<<<<<< HEAD
 
         .side-panel-left h2 {
+=======
+        .side-panel-left {
+            left: 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+        }
+        .side-panel-right {
+            right: 0;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+        }
+        .side-panel-left h2, .side-panel-right h2 {
+>>>>>>> 5340a64969fce81463909ae6f5a7797de151acc2
             color: #007bff;
             margin-bottom: 15px;
         }
@@ -75,8 +125,22 @@
         .project-link:hover {
             color: #fff;
         }
+<<<<<<< HEAD
 
         /* Styling for the current time banner */
+=======
+        .top-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 2;
+        }
+>>>>>>> 5340a64969fce81463909ae6f5a7797de151acc2
         .banner {
             position: fixed;
             bottom: 0;
@@ -86,6 +150,7 @@
             text-align: center;
             padding: 10px 0;
         }
+<<<<<<< HEAD
 
         /* Styling for the right side panel */
         .side-panel-right {
@@ -107,15 +172,15 @@
             color: #007bff;
             margin-bottom: 15px;
         }
+=======
+>>>>>>> 5340a64969fce81463909ae6f5a7797de151acc2
     </style>
 </head>
 
 <body>
-    <!-- Snow and rain containers -->
     <div class="snow-container"></div>
     <div class="rain-container"></div>
 
-    <!-- Left side panel for projects -->
     <div class="side-panel-left">
         <h2>My Projects</h2>
         <a class="project-link" href="https://github.com/1997-wh/Unemployment_Rates_R" target="_blank">Unemployment
@@ -126,13 +191,13 @@
         <a class="project-link" href="https://github.com/1997-wh/Amazon_Sales_SQL" target="_blank">Amazon Sales</a>
     </div>
 
-    <!-- Right side panel for weather -->
     <div class="side-panel-right">
         <h2>Current Weather</h2>
         <div id="weather"></div>
         <div id="location"></div>
     </div>
 
+<<<<<<< HEAD
     <div class="container">
         <h1>Welcome</h1>
         <img src="profilepicture.jfif" alt="William Higginbotham">
@@ -141,6 +206,17 @@
         <br>
         <a class="resume-link" href="https://www.linkedin.com/in/william-higginbotham-851556130/" target="_blank">View
             My LinkedIn</a>
+=======
+    <h1>Welcome</h1>
+    <img src="profilepicture.jfif" alt="William Higginbotham">
+    <p>Hi, I'm William Higginbotham, a Data Analyst.</p>
+    <a class="resume-link" href="William Higginbotham Resume (1).pdf" target="_blank">View My Resume</a>
+    <br>
+    <a class="resume-link" href="https://www.linkedin.com/in/william-higginbotham-851556130/" target="_blank">View My LinkedIn</a>
+
+    <div class="top-banner">
+        Please allow access to your location to test my OpenWeather API code.
+>>>>>>> 5340a64969fce81463909ae6f5a7797de151acc2
     </div>
 
     <div class="banner">
@@ -148,39 +224,46 @@
     </div>
 
     <script>
-        // JavaScript to display the current time in 12-hour format with AM/PM
         function updateTime() {
             var now = new Date();
             var hours = now.getHours();
             var minutes = now.getMinutes().toString().padStart(2, '0');
             var seconds = now.getSeconds().toString().padStart(2, '0');
             var amPm = hours >= 12 ? 'PM' : 'AM';
+<<<<<<< HEAD
 
             hours = hours % 12;
             hours = hours ? hours : 12;
 
             var currentTime = hours + ':' + minutes + ':' + seconds + ' ' + amPm;
             document.getElementById('currentTime').textContent = currentTime;
+=======
+            hours = hours % 12 || 12;
+            document.getElementById('currentTime').textContent = `${hours}:${minutes}:${seconds} ${amPm}`;
+>>>>>>> 5340a64969fce81463909ae6f5a7797de151acc2
         }
-
         setInterval(updateTime, 1000);
         updateTime();
 
-        // Fetch current weather data based on user's location
         async function fetchWeather(latitude, longitude) {
             const apiKey = '37104ead748f70ca9eb013e3d2199195';
             const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
-
             try {
                 const response = await fetch(url);
                 const data = await response.json();
                 if (data.weather) {
+<<<<<<< HEAD
                     const weatherInfo = `
                         <p>Temperature: ${data.main.temp} °F</p>
                         <p>Condition: ${data.weather[0].description}</p>
                     `;
                     document.getElementById('weather').innerHTML = weatherInfo;
                     document.getElementById('location').innerHTML = `Location: ${data.name}`;
+=======
+                    document.getElementById('weather').innerHTML = `<p>Temperature: ${data.main.temp} °F</p><p>Condition: ${data.weather[0].description}</p>`;
+                    document.getElementById('location').innerHTML = `Location: ${data.name}`;
+                    data.weather[0].main.toLowerCase() === 'snow' ? startSnowfall() : startRainfall();
+>>>>>>> 5340a64969fce81463909ae6f5a7797de151acc2
                 }
             } catch (error) {
                 console.error('Error fetching weather data:', error);
@@ -189,21 +272,48 @@
 
         function getLocation() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const { latitude, longitude } = position.coords;
-                        fetchWeather(latitude, longitude);
-                    },
-                    (error) => {
-                        console.error('Error getting location:', error);
-                    }
-                );
+                navigator.geolocation.getCurrentPosition((position) => {
+                    fetchWeather(position.coords.latitude, position.coords.longitude);
+                });
             } else {
-                console.error('Geolocation is not supported by this browser.');
+                console.error('Geolocation is not supported.');
             }
         }
 
         window.onload = getLocation;
+<<<<<<< HEAD
+=======
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.textContent = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            snowflake.style.fontSize = (Math.random() * 1 + 0.5) + 'em';
+            document.querySelector('.snow-container').appendChild(snowflake);
+            snowflake.addEventListener('animationend', () => snowflake.remove());
+        }
+
+        function startSnowfall() {
+            setInterval(createSnowflake, 100);
+        }
+
+        function createRaindrop() {
+            const raindrop = document.createElement('div');
+            raindrop.className = 'raindrop';
+            raindrop.textContent = '⛈';
+            raindrop.style.left = Math.random() * 100 + 'vw';
+            raindrop.style.animationDuration = (Math.random() * 2 + 1) + 's';
+            raindrop.style.fontSize = (Math.random() * 1 + 0.5) + 'em';
+            document.querySelector('.rain-container').appendChild(raindrop);
+            raindrop.addEventListener('animationend', () => raindrop.remove());
+        }
+
+        function startRainfall() {
+            setInterval(createRaindrop, 100);
+        }
+>>>>>>> 5340a64969fce81463909ae6f5a7797de151acc2
     </script>
 </body>
 
