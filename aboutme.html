@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>William Higginbotham's Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>My Projects</h2>
+        <ul>
+            <li><a href="#">Unemployment Rates</a></li>
+            <li><a href="#">BellaBeat Case Study</a></li>
+            <li><a href="#">BikeStudy Case Study</a></li>
+            <li><a href="#">BTC Price Analysis</a></li>
+            <li><a href="#">Amazon Sales</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h1>Welcome</h1>
+        <img src="profilepicture.jfif" alt="Profile Picture" class="profile-pic">
+        <p>Hi, I'm William Higginbotham, a Data Analyst.</p>
+        <button onclick="window.location.href='William Higginbotham Resume (1).pdf'">View My Resume</button>
+        <button onclick="window.location.href='https://www.linkedin.com/in/william-higginbotham-851556130/'">View My LinkedIn</button>
+
+        <div class="about-me">
+            <h2>About Me</h2>
+            <p>Hello! I'm William Higginbotham, a data analyst with over three years of hands-on experience in transforming raw data into meaningful insights that drive business decisions. I specialize in managing and analyzing large datasets using a variety of tools and techniques, including SQL, Python, and R, and I'm skilled in creating data visualizations with Tableau and Power BI. My experience spans data extraction, transformation, and loading (ETL) processes, as well as advanced data manipulation in Excel and DAX for creating impactful reports and dashboards.</p>
+
+            <p>I am passionate about uncovering trends and patterns that contribute to data-driven strategies and improvements. With a background in business management and a focused skill set in data analytics, I bring both technical expertise and business acumen to my work. I’m always looking to expand my knowledge and apply my skills to solve complex problems and optimize data processes.</p>
+
+            <p>Feel free to explore my projects and reach out if you'd like to connect!</p>
+        </div>
+    </div>
+
+    <div class="weather-panel">
+        <h2>Current Weather</h2>
+        <p>Temperature: <span id="temperature"></span>°F</p>
+        <p>Condition: <span id="condition"></span></p>
+        <p>Location: <span id="location"></span></p>
+    </div>
+
+    <div class="footer">
+        Current time: <span id="currentTime"></span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
