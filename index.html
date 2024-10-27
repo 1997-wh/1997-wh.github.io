@@ -74,6 +74,14 @@
             text-align: center;
             padding: 10px 0;
         }
+        /* Styling for the About Me section */
+        .about-me {
+            margin-top: 20px;
+            text-align: left;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Slight background for readability */
+            border-radius: 8px;
+        }
         /* Styling for the right side panel */
         .side-panel-right {
             position: fixed;
@@ -103,6 +111,7 @@
     <!-- Left side panel for projects -->
     <div class="side-panel-left">
         <h2>My Projects</h2>
+        <a class="project-link" href="https://github.com/1997-wh/Unemployment_Rates_R" target="_blank">Unemployment Rates</a>
         <a class="project-link" href="https://github.com/1997-wh/Case_Study" target="_blank">BellaBeat Case Study</a>
         <a class="project-link" href="https://github.com/1997-wh/Bike_Study" target="_blank">BikeStudy Case Study</a>
         <a class="project-link" href="https://github.com/1997-wh/Tableau-Project" target="_blank">BTC Price Analysis</a>
@@ -123,8 +132,14 @@
         <a class="resume-link" href="William Higginbotham Resume (1).pdf" target="_blank">View My Resume</a>
         <br>
         <a class="resume-link" href="https://www.linkedin.com/in/william-higginbotham-851556130/" target="_blank">View My LinkedIn</a>
-        <br>
-        <a href="aboutme.html">Learn more about me</a>
+
+        <!-- About Me Section -->
+        <div class="about-me">
+            <h2>About Me</h2>
+            <p>Hello! I'm William Higginbotham, a data analyst with over three years of hands-on experience in transforming raw data into meaningful insights that drive business decisions. I specialize in managing and analyzing large datasets using a variety of tools and techniques, including SQL, Python, and R, and I'm skilled in creating data visualizations with Tableau and Power BI. My experience spans data extraction, transformation, and loading (ETL) processes, as well as advanced data manipulation in Excel and DAX for creating impactful reports and dashboards.</p>
+            <p>I am passionate about uncovering trends and patterns that contribute to data-driven strategies and improvements. With a background in business management and a focused skill set in data analytics, I bring both technical expertise and business acumen to my work. I’m always looking to expand my knowledge and apply my skills to solve complex problems and optimize data processes.</p>
+            <p>Feel free to explore my projects and reach out if you'd like to connect!</p>
+        </div>
     </div>
 
     <div class="banner">
@@ -159,9 +174,10 @@
                 const response = await fetch(url);
                 const data = await response.json();
                 if (data.weather) {
-                    const weatherInfo = 
-                        `<p>Temperature: ${data.main.temp} °F</p>
-                        <p>Condition: ${data.weather[0].description}</p>`;
+                    const weatherInfo = `
+                        <p>Temperature: ${data.main.temp} °F</p>
+                        <p>Condition: ${data.weather[0].description}</p>
+                    `;
                     document.getElementById('weather').innerHTML = weatherInfo;
                     document.getElementById('location').innerHTML = `Location: ${data.name}`;
                 }
