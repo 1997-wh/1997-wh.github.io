@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>William Higginbotham's Portfolio</title>
-    <link rel="stylesheet" href="style.css">
     <style>
         html, body {
             height: 100%;
@@ -26,20 +24,20 @@
             width: 150px;
             height: 150px;
         }
-        button {
+        .resume-link {
+            display: inline-block;
+            margin-top: 20px;
             padding: 10px 20px;
-            margin: 10px;
             background-color: #007bff;
             color: white;
-            border: none;
+            text-decoration: none;
             border-radius: 5px;
-            cursor: pointer;
         }
-        button:hover {
+        .resume-link:hover {
             background-color: #0056b3;
         }
-        /* Styling for the sidebar */
-        .sidebar {
+        /* Styling for the left side panel */
+        .side-panel-left {
             position: fixed;
             top: 0;
             left: 0;
@@ -51,40 +49,23 @@
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
             overflow-y: auto;
             z-index: 1;
+            margin-bottom: 40px;
         }
-        .sidebar h2 {
+        .side-panel-left h2 {
             color: #007bff;
             margin-bottom: 15px;
         }
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .sidebar a {
+        .project-link {
             color: #00d4ff;
             text-decoration: none;
             display: block;
             margin-bottom: 10px;
         }
-        .sidebar a:hover {
+        .project-link:hover {
             color: #fff;
         }
-        /* Content styles */
-        .content {
-            margin-left: 270px; /* Leave space for sidebar */
-            padding: 20px;
-        }
-        .weather-panel {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 250px;
-            background-color: #f1f1f1;
-            padding: 20px;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
-            z-index: 1;
-        }
-        .footer {
+        /* Styling for the current time banner */
+        .banner {
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -93,48 +74,120 @@
             text-align: center;
             padding: 10px 0;
         }
+        /* Styling for the right side panel */
+        .side-panel-right {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+            z-index: 1;
+            margin-bottom: 40px;
+        }
+        .side-panel-right h2 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
-    <div class="sidebar">
+    <!-- Snow and rain containers -->
+    <div class="snow-container"></div>
+    <div class="rain-container"></div>
+
+    <!-- Left side panel for projects -->
+    <div class="side-panel-left">
         <h2>My Projects</h2>
-        <ul>
-            <li><a href="https://github.com/1997-wh/Unemployment_Rates_R" target="_blank">Unemployment Rates</a></li>
-            <li><a href="https://github.com/1997-wh/Case_Study" target="_blank">BellaBeat Case Study</a></li>
-            <li><a href="https://github.com/1997-wh/Bike_Study" target="_blank">BikeStudy Case Study</a></li>
-            <li><a href="https://github.com/1997-wh/Tableau-Project" target="_blank">BTC Price Analysis</a></li>
-            <li><a href="https://github.com/1997-wh/Amazon_Sales_SQL" target="_blank">Amazon Sales</a></li>
-        </ul>
+        <a class="project-link" href="https://github.com/1997-wh/Unemployment_Rates_R" target="_blank">Unemployment Rates</a>
+        <a class="project-link" href="https://github.com/1997-wh/Case_Study" target="_blank">BellaBeat Case Study</a>
+        <a class="project-link" href="https://github.com/1997-wh/Bike_Study" target="_blank">BikeStudy Case Study</a>
+        <a class="project-link" href="https://github.com/1997-wh/Tableau-Project" target="_blank">BTC Price Analysis</a>
+        <a class="project-link" href="https://github.com/1997-wh/Amazon_Sales_SQL" target="_blank">Amazon Sales</a>
     </div>
 
-    <div class="content">
-        <h1>Welcome</h1>
-        <img src="profilepicture.jfif" alt="Profile Picture" class="profile-pic">
-        <p>Hi, I'm William Higginbotham, a Data Analyst.</p>
-        <button onclick="window.location.href='William Higginbotham Resume (1).pdf'">View My Resume</button>
-        <button onclick="window.location.href='https://www.linkedin.com/in/william-higginbotham-851556130/'">View My LinkedIn</button>
-
-        <div class="about-me">
-            <h2>About Me</h2>
-            <p>Hello! I'm William Higginbotham, a data analyst with over three years of hands-on experience in transforming raw data into meaningful insights that drive business decisions. I specialize in managing and analyzing large datasets using a variety of tools and techniques, including SQL, Python, and R, and I'm skilled in creating data visualizations with Tableau and Power BI. My experience spans data extraction, transformation, and loading (ETL) processes, as well as advanced data manipulation in Excel and DAX for creating impactful reports and dashboards.</p>
-
-            <p>I am passionate about uncovering trends and patterns that contribute to data-driven strategies and improvements. With a background in business management and a focused skill set in data analytics, I bring both technical expertise and business acumen to my work. I’m always looking to expand my knowledge and apply my skills to solve complex problems and optimize data processes.</p>
-
-            <p>Feel free to explore my projects and reach out if you'd like to connect!</p>
-        </div>
-    </div>
-
-    <div class="weather-panel">
+    <!-- Right side panel for weather -->
+    <div class="side-panel-right">
         <h2>Current Weather</h2>
-        <p>Temperature: <span id="temperature"></span>°F</p>
-        <p>Condition: <span id="condition"></span></p>
-        <p>Location: <span id="location"></span></p>
+        <div id="weather"></div>
+        <div id="location"></div>
     </div>
 
-    <div class="footer">
+    <div class="container">
+        <h1>Welcome</h1>
+        <img src="profilepicture.jfif" alt="William Higginbotham">
+        <p>Hi, I'm William Higginbotham, a Data Analyst.</p>
+        <a class="resume-link" href="William Higginbotham Resume (1).pdf" target="_blank">View My Resume</a>
+        <br>
+        <a class="resume-link" href="https://www.linkedin.com/in/william-higginbotham-851556130/" target="_blank">View My LinkedIn</a>
+        <br>
+        <a href="aboutme.html">Learn more about me</a>
+    </div>
+
+    <div class="banner">
         Current time: <span id="currentTime"></span>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // JavaScript to display the current time in 12-hour format with AM/PM
+        function updateTime() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes().toString().padStart(2, '0');
+            var seconds = now.getSeconds().toString().padStart(2, '0');
+            var amPm = hours >= 12 ? 'PM' : 'AM';
+
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+
+            var currentTime = hours + ':' + minutes + ':' + seconds + ' ' + amPm;
+            document.getElementById('currentTime').textContent = currentTime;
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Fetch current weather data based on user's location
+        async function fetchWeather(latitude, longitude) {
+            const apiKey = '37104ead748f70ca9eb013e3d2199195';
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                if (data.weather) {
+                    const weatherInfo = 
+                        `<p>Temperature: ${data.main.temp} °F</p>
+                        <p>Condition: ${data.weather[0].description}</p>`;
+                    document.getElementById('weather').innerHTML = weatherInfo;
+                    document.getElementById('location').innerHTML = `Location: ${data.name}`;
+                }
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+            }
+        }
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        fetchWeather(latitude, longitude);
+                    },
+                    (error) => {
+                        console.error('Error getting location:', error);
+                    }
+                );
+            } else {
+                console.error('Geolocation is not supported by this browser.');
+            }
+        }
+
+        window.onload = getLocation;
+    </script>
 </body>
 </html>
