@@ -67,7 +67,7 @@
         <p>Discover the marketing strategy for the Ethereal Chronicles game, including detailed analysis, promotional visuals, and a promo video.</p>
 
         <h2>Project Analysis</h2>
-        <!-- Embed Ethereal Chronicles Analysis PDF -->
+        <!-- Analysis write-up PDF -->
         <iframe src="assets/pdf/Ethereal_Chronicles_Analysis.pdf" title="Project Analysis"></iframe>
         <a href="assets/pdf/Ethereal_Chronicles_Analysis.pdf" download="Ethereal_Chronicles_Analysis.pdf">Download Project Analysis PDF</a>
 
@@ -77,13 +77,13 @@
         <a href="assets/pdf/carousel_1.pdf" download="carousel_1.pdf">Download Mockups of Ads (Carousel 1)</a>
 
         <h2>In-Game Previews (Carousel 2)</h2>
-        <!-- Embed second carousel PDF -->
+        <!-- In game view PDF -->
         <iframe src="assets/pdf/carousel_2.pdf" title="In-Game Previews Carousel 2"></iframe>
         <a href="assets/pdf/carousel_2.pdf" download="carousel_2.pdf">Download In-Game Previews (Carousel 2)</a>
 
         <h2>Promo Video</h2>
-        <!-- Embed promo video -->
-        <video controls>
+        <!--promo video -->
+        <video id="promoVideo" controls>
             <source src="assets/videos/Promo_Video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -93,5 +93,10 @@
     <footer>
         © 2024 William Higginbotham. All Rights Reserved.
     </footer>
+
+    <script>
+        const promoVideo = document.getElementById('promoVideo');
+        promoVideo.volume = 0.25; // 0.0 to 1.0
+    </script>
 </body>
 </html>
