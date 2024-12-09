@@ -36,7 +36,7 @@
         .resume-link:hover {
             background-color: #0056b3;
         }
-        /* Styling for the left side panel */
+        
         .side-panel-left {
             position: fixed;
             top: 0;
@@ -64,7 +64,7 @@
         .project-link:hover {
             color: #fff;
         }
-        /* Styling for the current time banner */
+        
         .banner {
             position: fixed;
             bottom: 0;
@@ -74,16 +74,16 @@
             text-align: center;
             padding: 10px 0;
         }
-        /* Styling for the About Me section */
+    
         .about-me {
             margin: 20px auto;
             text-align: left;
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8); /* Slight background for readability */
+            background-color: rgba(255, 255, 255, 0.8); 
             border-radius: 8px;
-            max-width: 700px; /* Limit the width to prevent covering */
+            max-width: 700px; 
         }
-        /* Styling for the right side panel */
+      
         .side-panel-right {
             position: fixed;
             top: 0;
@@ -105,11 +105,11 @@
     </style>
 </head>
 <body>
-    <!-- Snow and rain containers -->
+    
     <div class="snow-container"></div>
     <div class="rain-container"></div>
 
-    <!-- Left side panel for projects -->
+   
     <div class="side-panel-left">
     <h2>My Projects</h2>
     <a class="project-link" href="https://github.com/1997-wh/Case_Study" target="_blank">BellaBeat Case Study</a>
@@ -122,7 +122,7 @@
 </div>
 
 
-    <!-- Right side panel for weather -->
+    
     <div class="side-panel-right">
         <h2>Current Weather</h2>
         <div id="weather"></div>
@@ -137,7 +137,7 @@
         <br>
         <a class="resume-link" href="https://www.linkedin.com/in/william-higginbotham-851556130/" target="_blank">View My LinkedIn</a>
 
-        <!-- About Me Section -->
+        
         <div class="about-me">
             <h2>About Me</h2>
             <p>Hello! I'm William Higginbotham, a data analyst with over three years of hands-on experience in transforming raw data into meaningful insights that drive business decisions. I specialize in managing and analyzing large datasets using a variety of tools and techniques, including SQL, Python, and R, and I'm skilled in creating data visualizations with Tableau and Power BI. My experience spans data extraction, transformation, and loading (ETL) processes, as well as advanced data manipulation in Excel and DAX for creating impactful reports and dashboards.</p>
@@ -151,7 +151,7 @@
     </div>
 
     <script>
-        // JavaScript to display the current time in 12-hour format with AM/PM
+        
         function updateTime() {
             var now = new Date();
             var hours = now.getHours();
@@ -169,7 +169,7 @@
         setInterval(updateTime, 1000);
         updateTime();
 
-        // Fetch current weather data based on user's location
+        
         async function fetchWeather(latitude, longitude) {
             const apiKey = 'f7b085c794096b4f661d9838a42cb01c';
             const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
